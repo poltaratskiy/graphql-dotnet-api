@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore.SystemTextJson" Version="4.4.1" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="4.4.1" />
+    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="4.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GraphQLvsRest.Abstractions\GraphQLvsRest.Abstractions.csproj" />
+    <ProjectReference Include="..\GraphQLvsRest.Data\GraphQLvsRest.Data.csproj" />
+  </ItemGroup>
+
+</Project>

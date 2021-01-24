@@ -20,6 +20,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLvsRest.Data", "Graph
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLvsRest.REST", "GraphQLvsRest.REST\GraphQLvsRest.REST.csproj", "{2E2C642B-200D-4564-AAD2-184FF5FD948F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLvsRest.IQueryable", "GraphQLvsRest.IQueryable\GraphQLvsRest.IQueryable.csproj", "{3A61B065-5D80-4547-A1A2-BAAF826BF52A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{2E2C642B-200D-4564-AAD2-184FF5FD948F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E2C642B-200D-4564-AAD2-184FF5FD948F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E2C642B-200D-4564-AAD2-184FF5FD948F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A61B065-5D80-4547-A1A2-BAAF826BF52A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A61B065-5D80-4547-A1A2-BAAF826BF52A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A61B065-5D80-4547-A1A2-BAAF826BF52A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A61B065-5D80-4547-A1A2-BAAF826BF52A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

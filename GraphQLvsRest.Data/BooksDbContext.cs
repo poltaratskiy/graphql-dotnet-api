@@ -1,6 +1,5 @@
 ﻿using GraphQLvsRest.Data.Dto;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 #nullable disable
 namespace GraphQLvsRest.Data

@@ -1,11 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GraphQLvsRest.REST
 {
@@ -17,10 +12,18 @@ namespace GraphQLvsRest.REST
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            new HostBuilder()
+            .ConfigureAppConfiguration(cfg => cfg
+                .AddJsonFile("appsettings.json")
+                .AddCommandLine(args)
+                .AddEnvironmentVariables())
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseKestrel(serverOptions =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    // Set properties and call methods on options
+                })
+                .UseStartup<Startup>();
+            });
     }
 }

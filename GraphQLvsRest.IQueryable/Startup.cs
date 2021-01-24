@@ -1,10 +1,7 @@
-using AutoMapper;
 using GraphQL.Server;
 using GraphQL.Types;
-using GraphQLvsRest.Abstractions;
 using GraphQLvsRest.Data;
-using GraphQLvsRest.Impl;
-using GraphQLvsRest.Impl.Mapping;
+using GraphQLvsRest.IQueryable.GraphQl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace GraphQLvsRest.GraphQL
+namespace GraphQLvsRest.IQueryable
 {
     public class Startup
     {
@@ -26,13 +23,8 @@ namespace GraphQLvsRest.GraphQL
             _configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHealthChecks()
-                .AddDbContextCheck<BooksDbContext>();
-
             #region logging
             services.AddLogging(cfg =>
                 cfg.AddConsole()
@@ -53,6 +45,16 @@ namespace GraphQLvsRest.GraphQL
                 }));
             #endregion logging
 
+            #region database
+            services.AddPooledDbContextFactory<BooksDbContext>((serviceProvider, options) =>
+            {
+                options.UseSqlite(_configuration.GetConnectionString("DefaultConnection"));
+                //options.UseInMemoryDatabase("BooksDatabase");
+                options.UseLoggerFactory(serviceProvider.GetRequiredService<ILoggerFactory>());
+                options.UseLazyLoadingProxies();
+            });
+            #endregion database
+
             services
                 .AddSingleton<Schema, GraphQlSchema>()
                 .AddGraphQL((options, provider) =>
@@ -64,45 +66,19 @@ namespace GraphQLvsRest.GraphQL
                 .AddSystemTextJson()
                 .AddDataLoader()
                 .AddGraphTypes(typeof(GraphQlSchema).Assembly, ServiceLifetime.Singleton);
-
-            services.AddPooledDbContextFactory<BooksDbContext>((serviceProvider, options) =>
-            {
-                options.UseSqlite(_configuration.GetConnectionString("DefaultConnection"));
-                //options.UseInMemoryDatabase("BooksDatabase");
-                options.UseLoggerFactory(serviceProvider.GetRequiredService<ILoggerFactory>());
-                options.UseLazyLoadingProxies();
-            });
-
-            var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddMaps(typeof(MapperProfile)));
-            mapperConfiguration.AssertConfigurationIsValid();
-            services.AddSingleton<IMapper>(mapperConfiguration.CreateMapper());
-
-            services.AddSingleton<IBookStorage, BookStorage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseGraphQL<global::GraphQL.Types.Schema>(); // /graphql
             app.UseGraphQLPlayground();
             app.UseGraphQLVoyager();
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
+            if (env.IsDevelopment())
             {
-                endpoints.MapHealthChecks("/health");
-
-                /*endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });*/
-            });
+                app.UseDeveloperExceptionPage();
+            }
         }
     }
 }
