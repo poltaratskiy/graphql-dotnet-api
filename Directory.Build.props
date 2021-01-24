@@ -1,0 +1,15 @@
+<Project>
+
+	<PropertyGroup>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<Authors>Konstantin Poltaratskiy</Authors>
+		<Company>Konstantin Poltaratskiy</Company>
+		<Product>GraphQL vs REST</Product>
+		<RepositoryUrl>https://github.com/poltaratskiy/graphql-dotnet-api</RepositoryUrl>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+</Project>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>GraphQLvsRest.Impl</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GraphQLvsRest.Abstractions\GraphQLvsRest.Abstractions.csproj" />
+    <ProjectReference Include="..\GraphQLvsRest.Data\GraphQLvsRest.Data.csproj" />
+  </ItemGroup>
+
+</Project>

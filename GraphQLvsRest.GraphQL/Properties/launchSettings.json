@@ -1,0 +1,21 @@
+{
+  "profiles": {
+    "GraphQLvsRest.GraphQL": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "ui/playground",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": "true",
+      "applicationUrl": "http://localhost:5000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true,
+      "useSSL": false
+    }
+  }
+}

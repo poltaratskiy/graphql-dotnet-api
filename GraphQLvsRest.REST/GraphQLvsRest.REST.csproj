@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>GraphQLvsRest.REST</RootNamespace>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GraphQLvsRest.Impl\GraphQLvsRest.Impl.csproj" />
+  </ItemGroup>
+
+</Project>
