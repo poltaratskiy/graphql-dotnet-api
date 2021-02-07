@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System.IO;
 
 namespace GraphQLvsRest.REST
 {
@@ -26,11 +27,33 @@ namespace GraphQLvsRest.REST
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region logging
+            services.AddLogging(cfg =>
+                cfg.AddConsole()
+                .AddFilter((category, level) =>
+                {
+                    if (category.Contains("Microsoft.AspNetCore") || category.Contains("Microsoft.Hosting"))
+                    {
+                        if (level >= LogLevel.Warning)
+                            return true;
+                        else
+                            return false;
+                    }
+
+                    if (category.Contains("Microsoft.EntityFrameworkCore") && level < LogLevel.Information)
+                        return false;
+
+                    return true;
+                }));
+            #endregion logging
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQLvsRest.REST", Version = "v1" });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "GraphQLvsRest.REST.xml");
+                c.IncludeXmlComments(filePath);
             });
 
             services.AddPooledDbContextFactory<BooksDbContext>((serviceProvider, options) =>

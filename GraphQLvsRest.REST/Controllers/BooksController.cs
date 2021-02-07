@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphQLvsRest.REST.Controllers
 {
+    /// <summary> Books. </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -32,7 +33,7 @@ namespace GraphQLvsRest.REST.Controllers
         public Task<IEnumerable<Book>> FindBooks(GetBooksFilter filter) => _bookStorage.FindBooks(filter);
 
         /// <summary> Add book to storage. </summary>
-        /// <param name="author"> New book. </param>
+        /// <param name="request"> New book. </param>
         /// <returns> Added book. </returns>
         [HttpPut]
         [Route("addbook")]

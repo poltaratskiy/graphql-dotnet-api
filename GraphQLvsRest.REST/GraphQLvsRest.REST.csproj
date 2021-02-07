@@ -5,6 +5,7 @@
     <RootNamespace>GraphQLvsRest.REST</RootNamespace>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

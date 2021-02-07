@@ -32,7 +32,7 @@ namespace GraphQLvsRest.REST.Controllers
         public Task<IEnumerable<Author>> GetAuthors(string template) => _bookStorage.FindAuthors(template);
 
         /// <summary> Add author to storage. </summary>
-        /// <param name="author"> New author. </param>
+        /// <param name="request"> New author. </param>
         /// <returns> Added author. </returns>
         [HttpPut]
         [Route("addauthor")]
